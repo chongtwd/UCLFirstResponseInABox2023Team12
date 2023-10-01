@@ -22,21 +22,85 @@
       </iframe>
     </div>
     <div class="resources">
-      <h2>Resources</h2>
-      <ul>
-        <li>
-          <a href="https://azure.microsoft.com/en-gb/free/students/">Azure for students</a>
-        </li>
-        <li>
-          <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestaticwebapps">Azure Static Web apps extension</a>
-        </li>
-        <li>
-          <a href="https://code.visualstudio.com/download">Visual Studio Code download</a>
-        </li>
-      </ul>
+      <h2>Models and Data Reviewed</h2>
+      <p>
+        1) <a href="https://github.com/facebookresearch/detr" target="_blank">DETR : End-to-End Object Detection with Transformers</a> / <a href="https://github.com/ultralytics/ultralytics" target="_blank">YOLO</a> <br /><br />
+        DETR/YOLO can be trained to detect a small class of objects, and there are examples where it has been trained to detect humans at various distances and background https://towardsdatascience.com/easy-object-detection-with-facebooks-detr-d0bd9e4e53a4. As the first step towards search and rescue is to identify humans from a distance in various backgrounds. Additionally, it can be difficult to spot humans purely from RGB camera due to the fact that sometimes they might be trapped behind other objects either partially or fully. If the UAV also has an infrared camera, it may also be possible to train to detect thermal images of humans using the PTB-TIR dataset and UAV Thermal Imaging dataset.<br /><br />
+        <b>Datasets for human detection</b>
+        <ul>
+          <li>
+            <a href="https://www.nrec.ri.cmu.edu/solutions/agriculture/other-agriculture-projects/human-detection-and-tracking.html" target="blank">Offroad Human Detection Dataset of people in orchards/farms</a>
+          </li>
+          <li>
+            <a href="https://github.com/ucas-vg/PointTinyBenchmark/tree/master/dataset" target="blank">TinyPerson for detecting humans from a distance in offroad scenario</a>
+          </li>
+          <li>
+            <a href="https://arxiv.org/pdf/1804.07437.pdf" target="blank">Human Detection from Drone Images dataset</a>
+          </li>
+          <li>
+            <a href="http://human-pose.mpi-inf.mpg.de/" target="blank">Humans in drone imaging</a>
+          </li>
+          <li>
+            <a href="http://human-pose.mpi-inf.mpg.de/" target="blank">MPII Human Pose Dataset for humans in various positions / doing different activities</a>
+          </li>
+          <li>
+            <a href="https://github.com/QiaoLiuHit/PTB-TIR_Evaluation_toolkit" target="blank">PTB-TIR Thermal Infrared Pedestrian Tracking</a>
+          </li>
+          <li>
+            <a href="https://zenodo.org/record/4327118" target="blank">Thermal Imaging from UAV</a>
+          </li>
+        </ul>
+      </p>
+      <p>
+        2) <a href="https://github.com/milesial/Pytorch-UNet" target="_blank">U-NET</a> - <a href="https://arxiv.org/abs/1505.04597" target="_blank">paper</a><br /><br />
+        U-NET is useful for segmenting images into different classes, and there have been examples on kaggle and other publications where segmentation of an image is able to detect areas of water / flood. This would be helpful for identifying if the individual is trapped due to being surrounded by water and could also be used to plan routes and equipment for rescue team.<br /><br />
+        <b>Datasets for Flood Scene Segmentation</b>
+        <ul>
+          <li>
+            <a href="https://www.kaggle.com/datasets/faizalkarim/flood-area-segmentation" target="blank">Small Kaggle Flood Dataset</a>
+          </li>
+          <li>
+            <a href="https://www.kaggle.com/datasets/hhrclemson/flooding-image-dataset" target="blank">Large Kaggle Flood Dataset</a>
+          </li>
+          <li>
+            <a href="https://www.kaggle.com/datasets/saurabhshahane/roadway-flooding-image-dataset" target="blank">Kaggle Flood Dataset with roads</a>
+          </li>
+        </ul>
+      </p>
+      <p>
+        3) <a href="https://github.com/salesforce/BLIP" target="_blank">BLIP</a> <br /><br />
+        For victims in a flood or other disaster settings, they may have injuries and may also be under threat from their environment. Using image captioning systems, we may be able to generate a representation of those images that could be used for downstream classification of how severe or dangerous a situation is for that person, and likely how much time we have to rescue them. There are no readily available datasets for this specific task as it is likely in extreme settings so this is challenging. The downstream regression/classification of danger severity could be performed directly on the caption output or perhaps an underlying representation that the model has learnt from the captioning. Alternatively we could also try direct from image. <br /><br />
+        <b>Papers performing dangerous situation captioning</b>
+        <ul>
+          <li>
+            <a href="https://arxiv.org/pdf/1711.02578.pdf" target="blank">Paper describing an image caption model/dataset for dangerous situations</a>
+          </li>
+          <li>
+            <a href="https://ieeexplore.ieee.org/document/9753788/" target="blank">Another paper describing image caption model/dataset for dangerous situations and might explain how they curated their dataset, but unable to access</a>
+          </li>
+        </ul>
+      </p>
+      <p>
+        4) <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose" target="_blank">OpenPose</a> + <a href="https://arxiv.org/abs/1612.00593" target="_blank">PointNet</a><br /><br />
+        OpenPose is a pre-trained model that is able to process images / video data and generate a set of points which can then be used for further downstream classification. Rule based algorithms could be used for instance by calculating the angle between points that represent joints of a human and making sure they dont exceed or are less than anatomically possible configurations that could help to look for dislocations or broken bones. However, assessing more complex activities such as walking, climbing, waving etc which victims might be doing, it might be more robust to train a model such as PointNet to identify these movements or positions instead. Being able to identify these poses and movements would enable us to automatically calculate inputs for triage assessment scores.<br /><br />
+        <b>Models and Data for pose classification</b>
+        <ul>
+          <li>
+            <a href="https://github.com/Daniil-Osokin/lightweight-human-pose-estimation.pytorch" target="blank">Lightweight OpenPost implementation</a>
+          </li>
+          <li>
+            <a href="http://human-pose.mpi-inf.mpg.de/" target="blank">MPII Human Pose Dataset for humans in various positions / doing different activities</a>
+          </li>
+        </ul>
+      </p>
+      <p>
+        5) <a href="https://www.tandfonline.com/doi/abs/10.1080/03091902.2017.1313326" target="_blank">Remote Heart Rate and Respiratory Rate monitoring</a> <br /><br />
+        This is a handcrafted model to estimate heart rate and respiratory rate from video imaging at a distance of about 50m. The model was only validated in 10 individuals and in very specific settings e.g front facing. Hence the validity of this model in disaster recovery is likely limited. However, the princple might be able to be extended with machine learning models such as using CNNs / RNNs on either the raw imaging or the transformed and augmented signals using Fourier/ICA as in the paper. Datasets for further fine tuning or training models would be difficult to come by due to the need for validation with pulse oximetry, and this is unlikely to be a priority in actual rescue settings. However an artificial dataset could be created, although this would be resource intensive.
+      </p>
+
     </div>
     <div class="footer">
-      &#169; copyright NAME 2022
+      Team 12 - PriorityEye
     </div>
     
   </body>
